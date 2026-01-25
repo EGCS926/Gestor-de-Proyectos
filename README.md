@@ -1,3 +1,4 @@
+HEAD
 # Gestor de Tareas – Full Stack
 
 Aplicación web para la gestión de tareas y proyectos, desarrollada con
@@ -48,3 +49,7 @@ Arquitectura basada en separación de responsabilidades:
 ```bash
 git clone https://github.com/usuario/gestor-tareas.git
 cd gestor-tareas
+
+# Gestor-de-Proyectos
+Aplicación full stack para gestión de proyectos y tareas
+ cc0760e9b93a524589560209b521df389b053750

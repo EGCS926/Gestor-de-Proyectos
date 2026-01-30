@@ -1,47 +1,43 @@
 import { useState } from "react";
 import { api } from "../services/api";
 
-export default function ProjectForm({ onCreated }) {
+export default function ProjectForm({ onProjectCreated }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  const submit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name) {
-      alert("El nombre es obligatorio");
-      return;
-    }
+    if (!name.trim()) return alert("El nombre es obligatorio");
 
-    const res = await api.post("/projects", {
+    await api.post("/projects", {
       name,
-      description
+      description,
     });
 
     setName("");
     setDescription("");
-
-    // 🔁 avisa al padre que hay un nuevo proyecto
-    onCreated && onCreated(res.data);
+    onProjectCreated(); // refresca la lista
   };
 
   return (
-    <form onSubmit={submit}>
-      <h3>Nuevo Proyecto</h3>
+    <form onSubmit={handleSubmit}>
+      <h3>Registrar proyecto</h3>
 
       <input
+        type="text"
         placeholder="Nombre del proyecto"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
 
-      <input
+      <textarea
         placeholder="Descripción"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
 
-      <button>Crear Proyecto</button>
+      <button type="submit">Guardar</button>
     </form>
   );
 }

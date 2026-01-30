@@ -16,6 +16,13 @@ export default function ProjectItem({ project, onChange }) {
     onChange();
   };
 
+  const deleteProject = async () => {
+    if (!confirm("¿Eliminar proyecto?")) return;
+
+    await api.delete(`/projects/${project._id}`);
+    onChange();
+  };
+
   return (
     <div>
       {editing ? (
@@ -29,6 +36,7 @@ export default function ProjectItem({ project, onChange }) {
           <strong>{project.name}</strong>
           <p>{project.description}</p>
           <button onClick={() => setEditing(true)}>Editar</button>
+          <button onClick={deleteProject}>Eliminar</button>
         </>
       )}
     </div>

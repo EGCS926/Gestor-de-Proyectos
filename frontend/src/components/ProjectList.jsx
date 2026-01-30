@@ -1,35 +1,24 @@
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
 
-export default function ProjectList({ refreshFlag, onSelect }) {
+export default function ProjectList({ refresh }) {
   const [projects, setProjects] = useState([]);
-
-  const loadProjects = async () => {
-    const res = await api.get("/projects");
-    setProjects(res.data);
-  };
+  
 
   useEffect(() => {
-    loadProjects();
-  }, [refreshFlag]); // 👈 se recarga cuando cambia
+    api.get("/projects").then(res => setProjects(res.data));
+  }, [refresh]);
 
   return (
     <div>
-      <h2>Proyectos</h2>
+      <h3>Proyectos registrados</h3>
 
-      {projects.length === 0 ? (
-        <p>No hay proyectos</p>
-      ) : (
-        <ul>
-          {projects.map((p) => (
-            <li key={p._id} onClick={() => onSelect && onSelect(p)}>
-              <strong>{p.name}</strong>
-              <br />
-              <small>{p.description}</small>
-            </li>
-          ))}
-        </ul>
-      )}
+      {projects.map(project => (
+        <div key={project._id}>
+          <strong>{project.name}</strong>
+          <p>{project.description}</p>
+        </div>
+      ))}
     </div>
   );
 }

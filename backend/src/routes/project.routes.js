@@ -1,10 +1,7 @@
-import express from "express";
-import {
-  getProjects,
-  createProject
-} from "../controllers/project.controller.js";
+import { Router } from "express";
+import { getProjects } from "../controllers/project.controller.js";
 
-const router = express.Router();
+const router = Router();
 
 router.get("/", getProjects);
 router.post("/", createProject);

@@ -5,6 +5,7 @@ import taskRoutes from "./src/routes/task.routes.js";
 import projectRoutes from "./src/routes/project.routes.js";
 import authRoutes from "./src/routes/auth.routes.js";
 import cors from "cors";
+import app from "./app.js";
 
 const app = express();
 app.use(express.json());

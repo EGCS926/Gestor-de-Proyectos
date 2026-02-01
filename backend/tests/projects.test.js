@@ -9,3 +9,19 @@ describe("GET /api/projects", () => {
     expect(Array.isArray(res.body)).toBe(true);
   });
 });
+describe("POST /api/projects", () => {
+  it("Debe crear un proyecto y devolver HTTP 201", async () => {
+    const newProject = {
+      name: "Proyecto Test",
+      description: "Proyecto creado desde test"
+    };
+
+    const res = await request(app)
+      .post("/api/projects")
+      .send(newProject);
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body).toHaveProperty("_id");
+    expect(res.body.name).toBe(newProject.name);
+  });
+});

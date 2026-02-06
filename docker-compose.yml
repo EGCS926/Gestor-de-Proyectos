@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  gateway:
+    build: ./services/api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth
+      - projects
+      - tasks
+      - notifications
+
+  auth:
+    build: ./services/auth-service
+    depends_on:
+      - mongo-auth
+
+  projects:
+    build: ./services/project-service
+    depends_on:
+      - mongo-projects
+
+  tasks:
+    build: ./services/task-service
+    depends_on:
+      - mongo-tasks
+
+  notifications:
+    build: ./services/notification-service
+    depends_on:
+      - redis
+    ports:
+      - "3004:3004"
+
+  mongo-auth:
+    image: mongo
+
+  mongo-projects:
+    image: mongo
+
+  mongo-tasks:
+    image: mongo
+
+  redis:
+    image: redis
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"

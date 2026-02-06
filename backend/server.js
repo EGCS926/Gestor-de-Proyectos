@@ -1,5 +1,4 @@
 // backend/server.js
-import express from "express";
 import { connectDB } from "./src/config/db.js";
 import taskRoutes from "./src/routes/task.routes.js";
 import projectRoutes from "./src/routes/project.routes.js";

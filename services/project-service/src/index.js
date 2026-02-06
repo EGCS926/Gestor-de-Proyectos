@@ -1,7 +1,12 @@
 import express from "express";
+import compression from "compression";
+import cors from "cors";
 import mongoose from "mongoose";
 
+// 🔥 MIDDLEWARES GLOBALES
 const app = express();
+app.use(compression()); // ✅ AQUÍ
+app.use(cors());
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI);
@@ -33,3 +38,14 @@ app.delete("/projects/:id", async (req, res) => {
 app.listen(4001, () =>
   console.log("Project Service running on port 4001")
 );
+
+// Rutas
+import projectRoutes from "./routes/project.routes.js";
+app.use("/projects", projectRoutes);
+
+// Conexión DB y server
+mongoose.connect(process.env.MONGO_URI);
+
+app.listen(3002, () => {
+  console.log("Project Service running on port 3002");
+});

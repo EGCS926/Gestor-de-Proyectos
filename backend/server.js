@@ -5,7 +5,7 @@ import taskRoutes from "./src/routes/task.routes.js";
 import projectRoutes from "./src/routes/project.routes.js";
 import authRoutes from "./src/routes/auth.routes.js";
 import cors from "cors";
-import app from "./srcapp.js";
+import app from "./app.js";
 
 app.use(cors());
 connectDB();
